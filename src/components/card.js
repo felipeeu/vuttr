@@ -74,13 +74,26 @@ const Label = styled.span`
   opacity: 1;
 `;
 
-const Card = () => {
+
+
+const Card = ({inputValue}) => {
   const [toolData, setToolData] = useState([]);
+
+  const handleDelete = toolId => {
+    setToolData(toolData.filter((tool)=> tool.id !== toolId ))
+    // const request = ToolsService.deleteTool(toolId);
+    // request.then(response =>  console.log("ID da Tool : ",toolId))
+  } 
 
   useEffect(() => {
     const request = ToolsService.getTools();
     request.then(response => setToolData(response.data));
   }, []);
+
+  useEffect(() => {
+    const request = ToolsService.filterToolByQuery(inputValue);
+    request.then(response => setToolData(response.data));
+  }, [inputValue]);
 
   return (
     toolData &&
@@ -93,7 +106,7 @@ const Card = () => {
             <Tags key={idx}>{`# ${tag}`}</Tags>
           ))}
         </TagsWrapper>
-        <RemoveButton>
+        <RemoveButton onClick = {()=> handleDelete(item.id)}>
           <Icon src={closeIcon} />
           <Label>Remove</Label>
         </RemoveButton>

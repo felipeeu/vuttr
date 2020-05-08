@@ -13,8 +13,10 @@ const InputSearch = styled.input.attrs(props => ({
   height: 20px;
 `;
 
-const Search = () => {
-  return <InputSearch />;
+const Search = ({setInputValue}) => {
+  
+
+  return <InputSearch onChange ={(e)=> setInputValue(e.target.value)}/>;
 };
 
 export default Search;

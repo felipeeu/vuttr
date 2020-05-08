@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Search from "./components/search_bar";
 import Check from "./components/checkbox";
 import Add from "./components/addbutton";
@@ -51,24 +51,23 @@ const TopWrapper = styled.section`
   grid-template-columns: 20% 2% 65% 15%;
 `;
 
-const Icon = styled.img`
-position:absolute;
 
-`;
 
 function App() {
+  const [inputValue , setInputValue]= useState("")
+  
   return (
     <AppContainer>
       <Title>VUTTR</Title>
       <SubTitle> Very Useful Tools to Remember</SubTitle>
       <Container>
         <TopWrapper>
-          <Search/>
+          <Search  setInputValue={setInputValue}/>
           <Check />
           <Label> search in tags only </Label>
           <Add />
         </TopWrapper>
-        <Card />
+        <Card inputValue={inputValue}/>
       </Container>
     </AppContainer>
   );
