@@ -15,7 +15,6 @@ const InputSearch = styled.input.attrs(props => ({
 
 const Search = ({setInputValue}) => {
   
-
   return <InputSearch onChange ={(e)=> setInputValue(e.target.value)}/>;
 };
 

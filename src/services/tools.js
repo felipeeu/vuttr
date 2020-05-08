@@ -29,7 +29,7 @@ class ToolsService {
     const axiosInstance = ConfigService.publicApiEndpoint();
 
     try {
-      const response = await axiosInstance.get(`/tools/tags_like=${tag}`);
+      const response = await axiosInstance.get(`/tools/?tags_like=${tag}`);
       if (response) return response;
     } catch (exception) {
       throw `Failed to get tools by tag. ${exception.toString()}`;

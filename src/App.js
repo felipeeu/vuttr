@@ -35,27 +35,21 @@ const SubTitle = styled.h2`
 const Container = styled.section`
   background-color: #e1e7fd;
 `;
-const Label = styled.section`
-  text-align: left;
-  font-family: Regular 20px/26px Source Sans Pro;
-  font-size: 12px;
-  letter-spacing: 0.4px;
-  color: #170c3a;
-  opacity: 1;
-`;
+
 
 const TopWrapper = styled.section`
   display: grid;
   padding-right: 50px;
   padding-left: 50px;
-  grid-template-columns: 20% 2% 65% 15%;
+  grid-template-columns: 20% 3% 62% 15%;
 `;
 
 
 
 function App() {
   const [inputValue , setInputValue]= useState("")
-  
+  const [checkValue , setCheckValue] = useState(false)
+   
   return (
     <AppContainer>
       <Title>VUTTR</Title>
@@ -63,11 +57,10 @@ function App() {
       <Container>
         <TopWrapper>
           <Search  setInputValue={setInputValue}/>
-          <Check />
-          <Label> search in tags only </Label>
+          <Check setCheckValue ={setCheckValue} />
           <Add />
         </TopWrapper>
-        <Card inputValue={inputValue}/>
+        <Card inputValue={inputValue} checkValue={checkValue}/>
       </Container>
     </AppContainer>
   );

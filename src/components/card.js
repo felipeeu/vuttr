@@ -74,9 +74,7 @@ const Label = styled.span`
   opacity: 1;
 `;
 
-
-
-const Card = ({inputValue}) => {
+const Card = ({inputValue,checkValue}) => {
   const [toolData, setToolData] = useState([]);
 
   const handleDelete = toolId => {
@@ -91,8 +89,13 @@ const Card = ({inputValue}) => {
   }, []);
 
   useEffect(() => {
-    const request = ToolsService.filterToolByQuery(inputValue);
+    if(checkValue){
+      console.log("Value: ",checkValue)
+      const request = ToolsService.getToolsByTag(inputValue);
     request.then(response => setToolData(response.data));
+    }else{
+    const request = ToolsService.filterToolByQuery(inputValue);
+    request.then(response => setToolData(response.data));}
   }, [inputValue]);
 
   return (
