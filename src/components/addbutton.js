@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import iconPlus from "../icons/Icon-Plus-Circle-2px.svg";
 import Modal from "styled-react-modal";
-import AddToolForm from "./modal"
+import AddToolForm from "./modal";
 
 const AddButton = styled.button.attrs(props => ({}))`
   position: relative;
@@ -12,6 +12,20 @@ const AddButton = styled.button.attrs(props => ({}))`
   align-self: center;
   height: 23px;
   max-width: 40x;
+  outline: none;
+`;
+
+const CloseButton = styled(AddButton)`
+  background: #f95e5a 0% 0% no-repeat padding-box;
+  position: absolute;
+  bottom: 1.8em;
+  right:7em;
+  width: 10.5em;
+  height: 4em;
+  text-align: center;
+  font: Semibold 18px/24px Source Sans Pro;
+  letter-spacing: 0.36px;
+  color: #ffffff;
 `;
 
 const Icon = styled.img`
@@ -27,8 +41,9 @@ const Label = styled.span`
 `;
 
 const StyledModal = Modal.styled`
-  width: 20rem;
-  height: 20rem;
+  position:relative;
+  width: 40em;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,8 +71,8 @@ const Add = () => {
         onBackgroundClick={toggleModal}
         onEscapeKeydown={toggleModal}
       >
-        <AddToolForm/>
-        <button onClick={toggleModal}>Close me</button>
+        <AddToolForm />
+        <CloseButton onClick={toggleModal}>Close me</CloseButton>
       </StyledModal>
     </>
   );
