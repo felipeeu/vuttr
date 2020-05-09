@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import closeIcon from "../icons/Icon-Close-Circle-2px.svg";
 import ToolsService from "../services/tools";
+import Modal from "styled-react-modal";
 
 const CardNote = styled.section`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -74,14 +75,28 @@ const Label = styled.span`
   opacity: 1;
 `;
 
-const Card = ({inputValue,checkValue}) => {
+const StyledModal = Modal.styled`
+  width: 20rem;
+  height: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+`;
+
+const Card = ({ inputValue, checkValue }) => {
   const [toolData, setToolData] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  function toggleModal(e) {
+    setIsOpen(!isOpen);
+  }
 
   const handleDelete = toolId => {
-    setToolData(toolData.filter((tool)=> tool.id !== toolId ))
+    setToolData(toolData.filter(tool => tool.id !== toolId));
     // const request = ToolsService.deleteTool(toolId);
     // request.then(response =>  console.log("ID da Tool : ",toolId))
-  } 
+  };
 
   useEffect(() => {
     const request = ToolsService.getTools();
@@ -89,13 +104,14 @@ const Card = ({inputValue,checkValue}) => {
   }, []);
 
   useEffect(() => {
-    if(checkValue){
-      console.log("Value: ",checkValue)
+    if (checkValue) {
+      console.log("Value: ", checkValue);
       const request = ToolsService.getToolsByTag(inputValue);
-    request.then(response => setToolData(response.data));
-    }else{
-    const request = ToolsService.filterToolByQuery(inputValue);
-    request.then(response => setToolData(response.data));}
+      request.then(response => setToolData(response.data));
+    } else {
+      const request = ToolsService.filterToolByQuery(inputValue);
+      request.then(response => setToolData(response.data));
+    }
   }, [inputValue]);
 
   return (
@@ -109,10 +125,18 @@ const Card = ({inputValue,checkValue}) => {
             <Tags key={idx}>{`# ${tag}`}</Tags>
           ))}
         </TagsWrapper>
-        <RemoveButton onClick = {()=> handleDelete(item.id)}>
+        <RemoveButton onClick={toggleModal}>
           <Icon src={closeIcon} />
           <Label>Remove</Label>
         </RemoveButton>
+        <StyledModal
+          isOpen={isOpen}
+          onBackgroundClick={toggleModal}
+          onEscapeKeydown={toggleModal}
+        >
+          <span>I am a modal!</span>
+          <button onClick={toggleModal}>Close me</button>
+        </StyledModal>
       </CardNote>
     ))
   );

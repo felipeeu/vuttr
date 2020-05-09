@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Search from "./components/search_bar";
 import Check from "./components/checkbox";
 import Add from "./components/addbutton";
 import Card from "./components/card";
 import styled from "styled-components";
+import { ModalProvider } from "styled-react-modal";
 
 const AppContainer = styled.section`
   display: flex;
@@ -26,7 +27,7 @@ const Title = styled.h1`
 const SubTitle = styled.h2`
   font-size: 1.5em;
   text-align: center;
-  color: #6554C0;
+  color: #6554c0;
   position: inherit;
   font: Semibold 42px/50px Source Sans Pro;
   letter-spacing: 0.84px;
@@ -36,7 +37,6 @@ const Container = styled.section`
   background-color: #e1e7fd;
 `;
 
-
 const TopWrapper = styled.section`
   display: grid;
   padding-right: 50px;
@@ -44,25 +44,25 @@ const TopWrapper = styled.section`
   grid-template-columns: 20% 3% 62% 15%;
 `;
 
-
-
 function App() {
-  const [inputValue , setInputValue]= useState("")
-  const [checkValue , setCheckValue] = useState(false)
-   
+  const [inputValue, setInputValue] = useState("");
+  const [checkValue, setCheckValue] = useState(false);
+
   return (
-    <AppContainer>
-      <Title>VUTTR</Title>
-      <SubTitle> Very Useful Tools to Remember</SubTitle>
-      <Container>
-        <TopWrapper>
-          <Search  setInputValue={setInputValue}/>
-          <Check setCheckValue ={setCheckValue} />
-          <Add />
-        </TopWrapper>
-        <Card inputValue={inputValue} checkValue={checkValue}/>
-      </Container>
-    </AppContainer>
+    <ModalProvider>
+      <AppContainer>
+        <Title>VUTTR</Title>
+        <SubTitle> Very Useful Tools to Remember</SubTitle>
+        <Container>
+          <TopWrapper>
+            <Search setInputValue={setInputValue} />
+            <Check setCheckValue={setCheckValue} />
+            <Add />
+          </TopWrapper>
+          <Card inputValue={inputValue} checkValue={checkValue} />
+        </Container>
+      </AppContainer>
+    </ModalProvider>
   );
 }
 
