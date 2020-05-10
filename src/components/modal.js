@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useEffect,useState} from "react";
 import { useFormik } from "formik";
+import Tools from '../services/tools'
 import styled from "styled-components";
 
 const InputModal = styled.input.attrs({ placeholder: "Type here ..." })`
@@ -60,52 +61,60 @@ const SubmitButton = styled.button.attrs({ disabled: false })`
 `;
 
 const AddToolForm = () => {
-  const formik = useFormik({
+  const [targetValue, setTargetValue] = useState("")
+
+const formik = useFormik({
     initialValues: {
-      toolName: "",
-      toolLink: "",
-      toolDescription: "",
-      tags: []
+      title: "",
+      link: "",
+      description: "",
     },
     onSubmit: values => {
+      const request =Tools.registerTool(values)
+      request.then((response => console.log("RESPONSE: ",response)))
       alert(JSON.stringify(values, null, 2));
     }
+
   });
   return (
     <form onSubmit={formik.handleSubmit}>
       <Wrapper>
         <h3>Add new Tool</h3>
-        <Label htmlFor="toolName">Tool Name</Label>
+        <Label htmlFor="title">Tool Name</Label>
         <InputModal
-          id="toolName"
-          name="toolName"
+          id="title"
+          name="title"
           type="text"
           onChange={formik.handleChange}
-          value={formik.values.toolName}
+          value={formik.values.title}
         />
-        <Label htmlFor="toolLink">ToolLink</Label>
+        <Label htmlFor="link">ToolLink</Label>
         <InputModal
-          id="toolLink"
-          name="toolLink"
+          id="link"
+          name="link"
           type="text"
           onChange={formik.handleChange}
-          value={formik.values.toolLink}
+          value={formik.values.link}
         />
-        <Label htmlFor="toolDescription">Tool Description</Label>
+        <Label htmlFor="description">Tool Description</Label>
         <InputArea
-          id="toolDescription"
-          name="toolDescription"
+          id="description"
+          name="description"
           type="text"
           onChange={formik.handleChange}
-          value={formik.values.toolDescription}
+          value={formik.values.description}
         />
         <Label htmlFor="tags">Tags</Label>
         <InputModal
           id="tags"
           name="tags"
           type="text"
-          onChange={formik.handleChange}
-          value={formik.values.tags}
+          onChange={({target})=> {
+            setTargetValue(target.value)
+            const parsedValue = targetValue.split(" ")
+            formik.setFieldValue("tags", parsedValue)
+          }}
+          value={targetValue}
         />
         <SubmitButton type="submit">Submit</SubmitButton>
       </Wrapper>
