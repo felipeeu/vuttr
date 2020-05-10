@@ -3,6 +3,7 @@ import styled from "styled-components";
 import closeIcon from "../icons/Icon-Close-Circle-2px.svg";
 import ToolsService from "../services/tools";
 import Modal from "styled-react-modal";
+import Loader from "./loader"
 
 const CardNote = styled.section`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -75,6 +76,7 @@ const Label = styled.span`
   opacity: 1;
 `;
 
+
 const StyledModal = Modal.styled`
   width: 20rem;
   height: 20rem;
@@ -103,42 +105,49 @@ const Card = ({ inputValue, checkValue }) => {
     request.then(response => setToolData(response.data));
   }, []);
 
-  useEffect(() => {
-    if (checkValue) {
-      console.log("Value: ", checkValue);
-      const request = ToolsService.getToolsByTag(inputValue);
-      request.then(response => setToolData(response.data));
-    } else {
-      const request = ToolsService.filterToolByQuery(inputValue);
-      request.then(response => setToolData(response.data));
-    }
-  }, [inputValue]);
+  useEffect(
+    checkValue => {
+      if (checkValue) {
+        const request = ToolsService.getToolsByTag(inputValue);
+        request.then(response => setToolData(response.data));
+      } else {
+        const request = ToolsService.filterToolByQuery(inputValue);
+        request.then(response => setToolData(response.data));
+      }
+    },
+    [inputValue]
+  );
 
-  return (
+  return toolData.length > 0 ? (
     toolData &&
-    toolData.map((item, idx) => (
-      <CardNote key={idx}>
-        <Title href={item.link}>{item.title}</Title>
-        <Description>{item.description}</Description>
-        <TagsWrapper>
-          {item.tags.map((tag, idx) => (
-            <Tags key={idx}>{`# ${tag}`}</Tags>
-          ))}
-        </TagsWrapper>
-        <RemoveButton onClick={toggleModal}>
-          <Icon src={closeIcon} />
-          <Label>Remove</Label>
-        </RemoveButton>
-        <StyledModal
-          isOpen={isOpen}
-          onBackgroundClick={toggleModal}
-          onEscapeKeydown={toggleModal}
-        >
-          <span>I am a modal!</span>
-          <button onClick={toggleModal}>Close me</button>
-        </StyledModal>
-      </CardNote>
-    ))
+      toolData.map((item, idx) => (
+        <CardNote key={idx}>
+          <Title href={item.link}>{item.title}</Title>
+          <Description>{item.description}</Description>
+          <TagsWrapper>
+            {item.tags.map((tag, idx) => (
+              <Tags key={idx}>{`# ${tag}`}</Tags>
+            ))}
+          </TagsWrapper>
+          <RemoveButton onClick={toggleModal}>
+            <Icon src={closeIcon} />
+            <Label>Remove</Label>
+          </RemoveButton>
+          <StyledModal
+            isOpen={isOpen}
+            onBackgroundClick={toggleModal}
+            onEscapeKeydown={toggleModal}
+          >
+            <span>I am a modal!</span>
+            <button onClick={toggleModal}>Close me</button>
+          </StyledModal>
+        </CardNote>
+      ))
+  ) : (
+    <>
+
+      <Loader />
+    </>
   );
 };
 
