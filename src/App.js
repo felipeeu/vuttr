@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import Search from "./components/search_bar";
 import Check from "./components/checkbox";
 import Add from "./components/addbutton";
-import Card from "./components/card";
+import Loader from "./components/loader"
 import styled from "styled-components";
 import { ModalProvider } from "styled-react-modal";
+
+const Card = React.lazy(() => import("./components/card"));
 
 const AppContainer = styled.section`
   display: flex;
@@ -39,8 +41,7 @@ const Container = styled.section`
 
 const TopWrapper = styled.section`
   display: grid;
-  padding-right: 50px;
-  padding-left: 50px;
+  padding: 20px 50px 20px 50px;
   grid-template-columns: 20% 3% 62% 15%;
 `;
 
@@ -59,7 +60,11 @@ function App() {
             <Check setCheckValue={setCheckValue} />
             <Add />
           </TopWrapper>
-          <Card inputValue={inputValue} checkValue={checkValue} />
+          <React.Suspense fallback={<Loader/>} >
+            
+            <Card inputValue={inputValue} checkValue={checkValue} />
+            
+          </React.Suspense>
         </Container>
       </AppContainer>
     </ModalProvider>
