@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import iconPlus from "../icons/Icon-Plus-Circle-2px.svg";
 import Modal from "styled-react-modal";
 import AddToolForm from "./modal";
 
@@ -28,11 +27,6 @@ const CloseButton = styled(AddButton)`
   color: #ffffff;
 `;
 
-const Icon = styled.img`
-  position: absolute;
-  max-height: 15px;
-  left: 20px;
-`;
 const Label = styled.span`
   font: Semibold 18px/24px Source Sans Pro;
   letter-spacing: 0.36px;
@@ -63,7 +57,6 @@ const Add = ({setToolData, toolData}) => {
   return (
     <>
       <AddButton onClick={toggleModal}>
-        <Icon src={iconPlus} />
         <Label>Add</Label>
       </AddButton>
       <StyledModal
