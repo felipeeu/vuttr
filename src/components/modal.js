@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useFormik } from "formik";
+import { useFormik, ErrorMessage } from "formik";
 import Tools from "../services/tools";
 import styled from "styled-components";
 import * as Yup from "yup";
@@ -61,6 +61,14 @@ const SubmitButton = styled.button.attrs({ disabled: false })`
   margin-bottom: 1.5em;
 `;
 
+const Error = styled.span`
+  padding-top: 3px;
+  color: red;
+  text-align: left;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+`;
+
 const AddToolForm = ({ setToolData, toolData, setIsOpen }) => {
   const [targetValue, setTargetValue] = useState("");
 
@@ -68,18 +76,15 @@ const AddToolForm = ({ setToolData, toolData, setIsOpen }) => {
     initialValues: {
       title: "",
       link: "",
-      description: ""
+      description: "",
+      tags:""
     },
 
     validationSchema: Yup.object({
-      title: Yup.string()
-        .max(15, "Must be 15 characters or less")
-        .required("Required"),
-      link: Yup.string()
-        .max(20, "Must be 20 characters or less")
-        .required("Required"),
-      description: Yup.string().required("Required")
-      // tags: Yup.string().required("Required")
+      title: Yup.string().required("Required"),
+      link: Yup.string().required("Required"),
+      description: Yup.string().required("Required"),
+      tags: Yup.string().required("Required")
     }),
     onSubmit: values => {
       if (formik.isValid) {
@@ -91,10 +96,9 @@ const AddToolForm = ({ setToolData, toolData, setIsOpen }) => {
           }
         });
       }
-      // alert(JSON.stringify(values, null, 2));
     }
   });
-  console.log("isValidate", formik.isValid);
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <Wrapper>
@@ -107,6 +111,10 @@ const AddToolForm = ({ setToolData, toolData, setIsOpen }) => {
           onChange={formik.handleChange}
           value={formik.values.title}
         />
+        {formik.touched.title && formik.errors.title ? (
+          <Error>{formik.errors.title}</Error>
+        ) : null}
+
         <Label htmlFor="link">ToolLink</Label>
         <InputModal
           id="link"
@@ -115,6 +123,9 @@ const AddToolForm = ({ setToolData, toolData, setIsOpen }) => {
           onChange={formik.handleChange}
           value={formik.values.link}
         />
+        {formik.touched.link && formik.errors.link ? (
+          <Error>{formik.errors.link}</Error>
+        ) : null}
         <Label htmlFor="description">Tool Description</Label>
         <InputArea
           id="description"
@@ -123,6 +134,9 @@ const AddToolForm = ({ setToolData, toolData, setIsOpen }) => {
           onChange={formik.handleChange}
           value={formik.values.description}
         />
+        {formik.touched.description && formik.errors.description ? (
+          <Error>{formik.errors.description}</Error>
+        ) : null}
         <Label htmlFor="tags">Tags</Label>
         <InputModal
           id="tags"
@@ -135,6 +149,9 @@ const AddToolForm = ({ setToolData, toolData, setIsOpen }) => {
           }}
           value={targetValue}
         />
+        {formik.touched.tags && formik.errors.tags ? (
+          <Error>{formik.errors.tags}</Error>
+        ) : null}
         <SubmitButton type="submit" disabled={!formik.isValidate}>
           Submit
         </SubmitButton>
