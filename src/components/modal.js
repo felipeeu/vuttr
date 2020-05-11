@@ -46,7 +46,7 @@ const Wrapper = styled.section`
   width: 30em;
 `;
 
-const SubmitButton = styled.button.attrs({ disabled: false })`
+const SubmitButton = styled.button`
   background: #365df0 0% 0% no-repeat padding-box;
   text-align: center;
   font: Semibold 30px/40px Source Sans Pro;
@@ -152,7 +152,7 @@ const AddToolForm = ({ setToolData, toolData, setIsOpen }) => {
         {formik.touched.tags && formik.errors.tags ? (
           <Error>{formik.errors.tags}</Error>
         ) : null}
-        <SubmitButton type="submit" disabled={!formik.isValidate}>
+        <SubmitButton type="submit" disabled={!formik.isValid}>
           Submit
         </SubmitButton>
       </Wrapper>
