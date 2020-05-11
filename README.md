@@ -21,11 +21,11 @@ yarn start
 # Demo
 
 ## Home
-![](./src/demo/demo_home.png)
+![](./src/demo/demoHome.png)
 ## Modal to add Tool 
-![](./src/demo/demo_add_tool.png)
+![](./src/demo/demoAddTool.png)
 ## Modal to agree with delete
-![](./src/demo/demo_delete_tool.png)
+![](./src/demo/demoDeleteTool.png)
 
 
 # Backend Server
