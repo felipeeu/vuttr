@@ -4,7 +4,7 @@ import Tools from "../services/tools";
 import styled from "styled-components";
 import * as Yup from "yup";
 
-const InputModal = styled.input.attrs({ placeholder: "Type here ..." })`
+const InputModal = styled.input`
   background: #ebeaed 0% 0% no-repeat padding-box;
   border: 1px solid #dedce1;
   border-radius: 5px;
@@ -17,9 +17,7 @@ const InputModal = styled.input.attrs({ placeholder: "Type here ..." })`
   letter-spacing: 0.4px;
   opacity: 1;
 `;
-const InputArea = styled.textarea.attrs({
-  placeholder: "Type description here ..."
-})`
+const InputArea = styled.textarea`
   background: #ebeaed 0% 0% no-repeat padding-box;
   border: 1px solid #dedce1;
   border-radius: 5px;
@@ -71,6 +69,7 @@ const Error = styled.span`
 
 const AddToolForm = ({ setToolData, toolData, setIsOpen }) => {
   const [targetValue, setTargetValue] = useState("");
+  
 
   const formik = useFormik({
     initialValues: {
@@ -110,6 +109,7 @@ const AddToolForm = ({ setToolData, toolData, setIsOpen }) => {
           type="text"
           onChange={formik.handleChange}
           value={formik.values.title}
+          placeholder="Type the tool title"
         />
         {formik.touched.title && formik.errors.title ? (
           <Error>{formik.errors.title}</Error>
@@ -122,6 +122,7 @@ const AddToolForm = ({ setToolData, toolData, setIsOpen }) => {
           type="text"
           onChange={formik.handleChange}
           value={formik.values.link}
+          placeholder="Type the link for tool"
         />
         {formik.touched.link && formik.errors.link ? (
           <Error>{formik.errors.link}</Error>
@@ -133,12 +134,14 @@ const AddToolForm = ({ setToolData, toolData, setIsOpen }) => {
           type="text"
           onChange={formik.handleChange}
           value={formik.values.description}
+          placeholder="Type a description for this tool"
         />
         {formik.touched.description && formik.errors.description ? (
           <Error>{formik.errors.description}</Error>
         ) : null}
         <Label htmlFor="tags">Tags</Label>
         <InputModal
+          placeholder= "Type with spaces between tags ..."
           id="tags"
           name="tags"
           type="text"
