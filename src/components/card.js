@@ -3,7 +3,7 @@ import styled from "styled-components";
 import closeIcon from "../icons/Icon-Close-Circle-2px.svg";
 import ToolsService from "../services/tools";
 import Modal from "styled-react-modal";
-import Loader from "./loader"
+import Loader from "./loader";
 
 const CardNote = styled.section`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -76,7 +76,6 @@ const Label = styled.span`
   opacity: 1;
 `;
 
-
 const StyledModal = Modal.styled`
   width: 20rem;
   height: 20rem;
@@ -86,10 +85,10 @@ const StyledModal = Modal.styled`
   background-color: white;
 `;
 
-const Card = ({ inputValue, checkValue }) => {
-  const [toolData, setToolData] = useState([]);
+const Card = ({ toolData, setToolData, inputValue, checkValue }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+ 
   function toggleModal(e) {
     setIsOpen(!isOpen);
   }
@@ -105,27 +104,26 @@ const Card = ({ inputValue, checkValue }) => {
     request.then(response => setToolData(response.data));
   }, []);
 
-  useEffect(
-    checkValue => {
-      if (checkValue) {
-        const request = ToolsService.getToolsByTag(inputValue);
-        request.then(response => setToolData(response.data));
-      } else {
-        const request = ToolsService.filterToolByQuery(inputValue);
-        request.then(response => setToolData(response.data));
-      }
-    },
-    [inputValue]
-  );
+  useEffect(() => {
+    if (checkValue) {
+      const request = ToolsService.getToolsByTag(inputValue);
+      request.then(response => setToolData(response.data));
+    } else {
+      const request = ToolsService.filterToolByQuery(inputValue);
+      request.then(response => setToolData(response.data));
+    }
+  }, [inputValue]);
 
-  return toolData.length > 0 ? (
+ 
+
+  return toolData && toolData.length > 0 ? (
     toolData &&
       toolData.map((item, idx) => (
         <CardNote key={idx}>
           <Title href={item.link}>{item.title}</Title>
           <Description>{item.description}</Description>
           <TagsWrapper>
-            {item.tags.map((tag, idx) => (
+            {item.tags && item.tags.map((tag, idx) => (
               <Tags key={idx}>{`# ${tag}`}</Tags>
             ))}
           </TagsWrapper>
@@ -145,7 +143,6 @@ const Card = ({ inputValue, checkValue }) => {
       ))
   ) : (
     <>
-
       <Loader />
     </>
   );

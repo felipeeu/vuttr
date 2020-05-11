@@ -1,7 +1,8 @@
-import React, {useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
-import Tools from '../services/tools'
+import Tools from "../services/tools";
 import styled from "styled-components";
+import * as Yup from "yup";
 
 const InputModal = styled.input.attrs({ placeholder: "Type here ..." })`
   background: #ebeaed 0% 0% no-repeat padding-box;
@@ -35,7 +36,7 @@ const InputArea = styled.textarea.attrs({
 
 const Label = styled.label`
   padding-top: 20px;
-  padding-bottom:5px;
+  padding-bottom: 5px;
 `;
 
 const Wrapper = styled.section`
@@ -56,26 +57,44 @@ const SubmitButton = styled.button.attrs({ disabled: false })`
   height: 4em;
   opacity: 1;
   outline: none;
-  margin-top:1.5em;
-  margin-bottom:1.5em;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
 `;
 
-const AddToolForm = () => {
-  const [targetValue, setTargetValue] = useState("")
+const AddToolForm = ({ setToolData, toolData, setIsOpen }) => {
+  const [targetValue, setTargetValue] = useState("");
 
-const formik = useFormik({
+  const formik = useFormik({
     initialValues: {
       title: "",
       link: "",
-      description: "",
+      description: ""
     },
-    onSubmit: values => {
-      const request =Tools.registerTool(values)
-      request.then((response => console.log("RESPONSE: ",response)))
-      alert(JSON.stringify(values, null, 2));
-    }
 
+    validationSchema: Yup.object({
+      title: Yup.string()
+        .max(15, "Must be 15 characters or less")
+        .required("Required"),
+      link: Yup.string()
+        .max(20, "Must be 20 characters or less")
+        .required("Required"),
+      description: Yup.string().required("Required")
+      // tags: Yup.string().required("Required")
+    }),
+    onSubmit: values => {
+      if (formik.isValid) {
+        const request = Tools.registerTool(values);
+        request.then(response => {
+          if (response.status === 201) {
+            setToolData(toolData && toolData.concat([response.data]));
+            setIsOpen(false);
+          }
+        });
+      }
+      // alert(JSON.stringify(values, null, 2));
+    }
   });
+  console.log("isValidate", formik.isValid);
   return (
     <form onSubmit={formik.handleSubmit}>
       <Wrapper>
@@ -109,14 +128,16 @@ const formik = useFormik({
           id="tags"
           name="tags"
           type="text"
-          onChange={({target})=> {
-            setTargetValue(target.value)
-            const parsedValue = targetValue.split(" ")
-            formik.setFieldValue("tags", parsedValue)
+          onChange={({ target }) => {
+            setTargetValue(target.value);
+            const parsedValue = targetValue.split(" ");
+            formik.setFieldValue("tags", parsedValue);
           }}
           value={targetValue}
         />
-        <SubmitButton type="submit">Submit</SubmitButton>
+        <SubmitButton type="submit" disabled={!formik.isValidate}>
+          Submit
+        </SubmitButton>
       </Wrapper>
     </form>
   );

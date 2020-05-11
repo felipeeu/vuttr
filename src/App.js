@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Search from "./components/search_bar";
 import Check from "./components/checkbox";
 import Add from "./components/addbutton";
-import Loader from "./components/loader"
+import Loader from "./components/loader";
 import styled from "styled-components";
 import { ModalProvider } from "styled-react-modal";
 
@@ -48,6 +48,7 @@ const TopWrapper = styled.section`
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [checkValue, setCheckValue] = useState(false);
+  const [toolData, setToolData] = useState([]);
 
   return (
     <ModalProvider>
@@ -58,12 +59,15 @@ function App() {
           <TopWrapper>
             <Search setInputValue={setInputValue} />
             <Check setCheckValue={setCheckValue} />
-            <Add />
+            <Add setToolData={setToolData} toolData={toolData} />
           </TopWrapper>
-          <React.Suspense fallback={<Loader/>} >
-            
-            <Card inputValue={inputValue} checkValue={checkValue} />
-            
+          <React.Suspense fallback={<Loader />}>
+            <Card
+              inputValue={inputValue}
+              checkValue={checkValue}
+              toolData={toolData}
+              setToolData={setToolData}
+            />
           </React.Suspense>
         </Container>
       </AppContainer>

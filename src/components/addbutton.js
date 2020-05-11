@@ -54,7 +54,7 @@ const StyledModal = Modal.styled`
   opacity: 1;
 `;
 
-const Add = () => {
+const Add = ({setToolData, toolData}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   function toggleModal(e) {
@@ -71,7 +71,7 @@ const Add = () => {
         onBackgroundClick={toggleModal}
         onEscapeKeydown={toggleModal}
       >
-        <AddToolForm />
+        <AddToolForm setToolData={setToolData}  toolData={toolData} setIsOpen ={setIsOpen}/>
         <CloseButton onClick={toggleModal}>Close me</CloseButton>
       </StyledModal>
     </>
