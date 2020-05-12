@@ -1,8 +1,10 @@
 # VUTTR Project - Very Useful Tools to Remember
 This is a project for a fron-end challenge for Bossabox. The application is a simple repository for managing tools with their  names, links, descriptions and tags.
 
+# Link to project
+https://felipeeu.github.io/vuttr/
 
-# Setup on Terminal and Run Project Locally (fron-tend)
+# Setup on Terminal for Run Project Locally (fron-tend)
 ```terminal
 git clone https://github.com/felipeeu/vuttr.git
 cd vuttr
@@ -31,14 +33,15 @@ yarn start
 ### Tech
 
 Vuttr uses some technologies o work properly:
-
-* [ReactJS] - a JavaScript library for building user interfaces
-* [Styled Components] - to write actual CSS code to style components
-* [Axios] - promise based HTTP client for the browser and node.js
-* [Formik] - to build forms in React
-* [Yup] - a JavaScript schema builder for value parsing and validation
-* [Gh pages] - to deploy front-end
-* [Heroku] - to deploy back-end
+| Tech | Description |Documentation|
+| ------ | ------ |------|
+| ReactJS | a JavaScript library for building user interfaces|https://reactjs.org/|
+| Styled Components | to write actual CSS code to style components|https://styled-components.com/|
+| Axios | promise based HTTP client for the browser and node.js|https://github.com/axios/axios|
+| Formik | to build forms in React|https://jaredpalmer.com/formik/|
+| Yup | a JavaScript schema builder for value parsing and validation|https://github.com/jquense/yup|
+| Gh pages | to deploy front-end|https://github.com/tschaub/gh-pages|
+| Json Server Heroku | to deploy back-end|https://github.com/jesperorb/json-server-heroku|
 
 
 
