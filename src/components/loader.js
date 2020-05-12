@@ -5,7 +5,7 @@ const Preloader = styled.span`
   width: 100px;
   height: 100px;
   border: 5px solid #365df0;
-  border-color: #365DF0 white white;
+  border-color: #365df0 white white;
   align-self: center;
   border-radius: 50%;
   animation: spin 2s linear infinite;
@@ -19,7 +19,7 @@ const Preloader = styled.span`
 const Label = styled.h2`
   font-size: 1.5em;
   text-align: center;
-  color: #365DF0;
+  color: #365df0;
   font: Semibold 42px/50px Source Sans Pro;
   letter-spacing: 0.84px;
 `;

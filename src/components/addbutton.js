@@ -18,7 +18,7 @@ const CloseButton = styled(AddButton)`
   background: #f95e5a 0% 0% no-repeat padding-box;
   position: absolute;
   bottom: 1.8em;
-  right:7em;
+  right: 7em;
   width: 10.5em;
   height: 4em;
   text-align: center;
@@ -48,7 +48,7 @@ const StyledModal = Modal.styled`
   opacity: 1;
 `;
 
-const Add = ({setToolData, toolData}) => {
+const Add = ({ setToolData, toolData }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   function toggleModal(e) {
@@ -64,7 +64,11 @@ const Add = ({setToolData, toolData}) => {
         onBackgroundClick={toggleModal}
         onEscapeKeydown={toggleModal}
       >
-        <AddToolForm setToolData={setToolData}  toolData={toolData} setIsOpen ={setIsOpen}/>
+        <AddToolForm
+          setToolData={setToolData}
+          toolData={toolData}
+          setIsOpen={setIsOpen}
+        />
         <CloseButton onClick={toggleModal}>Close me</CloseButton>
       </StyledModal>
     </>

@@ -1,7 +1,6 @@
 import ConfigService from "./config";
 
 class ToolsService {
-
   static getTools = async () => {
     const axiosInstance = ConfigService.publicApiEndpoint();
 
@@ -13,7 +12,7 @@ class ToolsService {
     }
   };
 
-  static filterToolByQuery = async (queryParam) => {
+  static filterToolByQuery = async queryParam => {
     const axiosInstance = ConfigService.publicApiEndpoint();
 
     try {
@@ -24,8 +23,7 @@ class ToolsService {
     }
   };
 
-
-  static getToolsByTag = async (tag) =>{
+  static getToolsByTag = async tag => {
     const axiosInstance = ConfigService.publicApiEndpoint();
 
     try {
@@ -34,8 +32,8 @@ class ToolsService {
     } catch (exception) {
       throw `Failed to get tools by tag. ${exception.toString()}`;
     }
-  }
-  
+  };
+
   static registerTool = async params => {
     const axiosInstance = ConfigService.publicApiEndpoint();
 

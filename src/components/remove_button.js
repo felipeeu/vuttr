@@ -66,7 +66,6 @@ const StyledModal = Modal.styled`
 `;
 
 const Remove = ({ itemToRemove, toolId, handleDelete, isOpen, setIsOpen }) => {
-
   function toggleModal(e) {
     setIsOpen(!isOpen);
   }

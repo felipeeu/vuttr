@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ToolsService from "../services/tools";
 import Loader from "./loader";
@@ -51,15 +51,15 @@ const TagsWrapper = styled.section`
 
 const Card = ({ toolData, setToolData, inputValue, checkValue }) => {
   const [isOpen, setIsOpen] = useState(false);
- 
+
   const handleDelete = toolId => {
     const request = ToolsService.deleteTool(toolId);
-    request.then(response =>  {
-      if(response.status === 200){
-        setToolData(toolData.filter(tool => tool.id !== toolId))
-        setIsOpen(false)  
+    request.then(response => {
+      if (response.status === 200) {
+        setToolData(toolData.filter(tool => tool.id !== toolId));
+        setIsOpen(false);
       }
-    })
+    });
   };
 
   useEffect(() => {
@@ -87,7 +87,13 @@ const Card = ({ toolData, setToolData, inputValue, checkValue }) => {
             {item.tags &&
               item.tags.map((tag, idx) => <Tags key={idx}>{`# ${tag}`}</Tags>)}
           </TagsWrapper>
-          <RemoveButton itemToRemove={item.title} toolId={item.id} handleDelete={handleDelete} isOpen= {isOpen} setIsOpen = {setIsOpen} />
+          <RemoveButton
+            itemToRemove={item.title}
+            toolId={item.id}
+            handleDelete={handleDelete}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+          />
         </CardNote>
       ))
   ) : (

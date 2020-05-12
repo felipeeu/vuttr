@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useFormik, ErrorMessage } from "formik";
+import React, { useState } from "react";
+import { useFormik } from "formik";
 import Tools from "../services/tools";
 import styled from "styled-components";
 import * as Yup from "yup";
@@ -69,14 +69,13 @@ const Error = styled.span`
 
 const AddToolForm = ({ setToolData, toolData, setIsOpen }) => {
   const [targetValue, setTargetValue] = useState("");
-  
 
   const formik = useFormik({
     initialValues: {
       title: "",
       link: "",
       description: "",
-      tags:""
+      tags: ""
     },
 
     validationSchema: Yup.object({
@@ -141,7 +140,7 @@ const AddToolForm = ({ setToolData, toolData, setIsOpen }) => {
         ) : null}
         <Label htmlFor="tags">Tags</Label>
         <InputModal
-          placeholder= "Type with spaces between tags ..."
+          placeholder="Type with spaces between tags ..."
           id="tags"
           name="tags"
           type="text"
