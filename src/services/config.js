@@ -1,7 +1,7 @@
 import axios from "axios";
 
 class ConfigService {
-  static endPointBaseUrl = `http://localhost:3000/`;
+  static endPointBaseUrl = `https://my-db-challenge.herokuapp.com/`;
 
 
   static publicHeaders = () => {
