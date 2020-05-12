@@ -28,6 +28,21 @@ yarn start
 ![](./src/demo/demoDeleteTool.png)
 
 
+### Tech
+
+Vuttr uses some technologies o work properly:
+
+* [ReactJS] - a JavaScript library for building user interfaces
+* [Styled Components] - to write actual CSS code to style components
+* [Axios] - promise based HTTP client for the browser and node.js
+* [Formik] - to build forms in React
+* [Yup] - a JavaScript schema builder for value parsing and validation
+* [Gh pages] - to deploy front-end
+* [Heroku] - to deploy back-end
+
+
+
+
 # Backend Server
   
 All about the API is described in this repository [here](https://gitlab.com/bossabox/challenge-fake-api/-/tree/master)
