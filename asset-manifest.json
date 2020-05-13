@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/vuttr/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/vuttr/static/js/main.290fb29d.chunk.js",
+    "main.js.map": "/vuttr/static/js/main.290fb29d.chunk.js.map",
+    "runtime-main.js": "/vuttr/static/js/runtime-main.6eb24dfc.js",
+    "runtime-main.js.map": "/vuttr/static/js/runtime-main.6eb24dfc.js.map",
+    "static/js/2.6b9b3293.chunk.js": "/vuttr/static/js/2.6b9b3293.chunk.js",
+    "static/js/2.6b9b3293.chunk.js.map": "/vuttr/static/js/2.6b9b3293.chunk.js.map",
+    "static/js/3.65c5d312.chunk.js": "/vuttr/static/js/3.65c5d312.chunk.js",
+    "static/js/3.65c5d312.chunk.js.map": "/vuttr/static/js/3.65c5d312.chunk.js.map",
+    "index.html": "/vuttr/index.html",
+    "precache-manifest.71f109fdba65b21ca488abd3336432da.js": "/vuttr/precache-manifest.71f109fdba65b21ca488abd3336432da.js",
+    "service-worker.js": "/vuttr/service-worker.js",
+    "static/css/main.5ecd60fb.chunk.css.map": "/vuttr/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.6b9b3293.chunk.js.LICENSE.txt": "/vuttr/static/js/2.6b9b3293.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6eb24dfc.js",
+    "static/js/2.6b9b3293.chunk.js",
+    "static/css/main.5ecd60fb.chunk.css",
+    "static/js/main.290fb29d.chunk.js"
+  ]
+}
