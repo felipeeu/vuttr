@@ -1,5 +1,5 @@
 # VUTTR Project - Very Useful Tools to Remember
-This is a project for a fron-end challenge for Bossabox. The application is a simple repository for managing tools with their  names, links, descriptions and tags.
+This is a project for a front-end challenge for Bossabox. The application is a simple repository for managing tools with their  names, links, descriptions and tags.
 
 # Link to project
 https://felipeeu.github.io/vuttr/
