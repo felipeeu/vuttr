@@ -65,13 +65,12 @@ const StyledModal = Modal.styled`
   opacity: 1;
 `;
 
-const Remove = ({ itemToRemove, toolId, handleDelete, isOpen, setIsOpen }) => {
-  function toggleModal(e) {
-    setIsOpen(!isOpen);
-  }
+const Remove = ({ itemTitle, toolId, handleDelete, isOpen , toggleModal , itemToRemove }) => {
+    
+ 
   return (
     <>
-      <RemoveButton onClick={toggleModal}>
+      <RemoveButton onClick={()=> toggleModal(itemTitle)}>
         <Label>Remove</Label>
       </RemoveButton>
       <StyledModal

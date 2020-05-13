@@ -47,10 +47,17 @@ const Tags = styled.h5`
 const TagsWrapper = styled.section`
   display: flex;
   flex-direction: row;
+  overflow:auto;
 `;
 
 const Card = ({ toolData, setToolData, inputValue, checkValue }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [itemToRemove, setItemToRemove] =useState("")
+
+  const toggleModal= (itemTitle)=> {
+    setIsOpen(!isOpen);
+    setItemToRemove(itemTitle)
+  }
 
   const handleDelete = toolId => {
     const request = ToolsService.deleteTool(toolId);
@@ -88,11 +95,12 @@ const Card = ({ toolData, setToolData, inputValue, checkValue }) => {
               item.tags.map((tag, idx) => <Tags key={idx}>{`# ${tag}`}</Tags>)}
           </TagsWrapper>
           <RemoveButton
-            itemToRemove={item.title}
+            itemTitle={item.title}
             toolId={item.id}
             handleDelete={handleDelete}
             isOpen={isOpen}
-            setIsOpen={setIsOpen}
+            toggleModal={toggleModal}
+            itemToRemove={itemToRemove}
           />
         </CardNote>
       ))
